@@ -9,7 +9,7 @@ function App() {
       <footer>
         Coded by Yadira DLTR, code hosted on{" "}
         <a
-          href="https://github.com/Yayiyi94/weather-app-react-v2"
+          href="https://github.com/Yayiyi94/weather-app-react-update"
           target="_blank"
           rel="noreferrer"
         >
@@ -17,7 +17,7 @@ function App() {
         </a>{" "}
         and website hosted on{" "}
         <a
-          href="https://weather-react-ydltr.netlify.app"
+          href="https://weather-app-ydltr-updated.netlify.app"
           target="_blank"
           rel="noreferrer"
         >
