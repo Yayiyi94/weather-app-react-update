@@ -3,7 +3,7 @@ import "./Weather.css";
 
 export default function Weather() {
   return (
-    <div>
+    <div className="Weather">
       <form className="searchEngine">
         <input
           type="search"
@@ -13,18 +13,17 @@ export default function Weather() {
         />
         <input type="submit" value="Search" className="search-button" />
       </form>
-      <div className="row">
+
+      <div className="row weather-overview">
         <div className="col-6">
-          <div className="weather-overview">
-            <h1 className="CityOverview">México</h1>
-            <p className="city-details">
-              <span>Monday 14:45,</span>
-              <span>Cloudy</span>
-              <br />
-              Humidity:
-              <span className="weather-details"> 49%</span> Wind:
-              <span className="weather-details"> 13 km/h</span>
-            </p>
+          <h1 className="CityOverview">México</h1>
+          <div className="city-details">
+            <span>Monday 14:45,</span>
+            <span>Cloudy</span>
+            <br />
+            Humidity:
+            <span className="weather-details"> 49%</span> Wind:
+            <span className="weather-details"> 13 km/h</span>
           </div>
         </div>
         <div className="col-6">
@@ -39,7 +38,7 @@ export default function Weather() {
             <span className="temperature-element" id="temperature-element">
               22
             </span>
-            <span className="temperature-degree">°C/°F</span>
+            <span className="temperature-degree">°C °F</span>
           </div>
         </div>
       </div>

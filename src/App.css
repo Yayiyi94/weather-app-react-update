@@ -5,10 +5,14 @@ body {
   text-align: center;
 }
 
+h1 {
+  font-size: 60px;
+}
+
 .App-container {
   background-color: #282c34;
   border-radius: 20px;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
