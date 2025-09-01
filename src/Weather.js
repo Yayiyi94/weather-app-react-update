@@ -4,6 +4,7 @@ import "./Weather.css";
 import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
+  const [city, setCity] = useState(props.defaultCity);
   const [weatherData, setWeatherData] = useState({ ready: false });
 
   function displayWeather(response) {
@@ -19,22 +20,45 @@ export default function Weather(props) {
     });
   }
 
+  function search() {
+    const apiKey = "10fa90a2o832483bf734tfe8a27fcdad";
+    let units = "metric";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${units}`;
+
+    axios
+      .get(apiUrl)
+      .then(displayWeather)
+      .catch((error) => {
+        console.error("Error fetching current weather", error);
+        alert("City not found, please type it again.");
+      });
+  }
+
+  function handleSumbit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleUpdatedCity(event) {
+    setCity(event.target.value);
+  }
+
   if (weatherData.ready) {
     return (
       <div className="Weather">
-        <form className="searchEngine">
+        <form onSubmit={handleSumbit} className="searchEngine">
           <input
             type="search"
             placeholder="Enter a city..."
-            required
             className="search-form-input"
+            onChange={handleUpdatedCity}
           />
           <input type="submit" value="Search" className="search-button" />
         </form>
 
         <div className="row weather-overview">
           <div className="col-6">
-            <h1 className="CityOverview">{weatherData.city}</h1>
+            <h1 className="CityOverview">{city}</h1>
             <div className="city-details">
               <span>
                 <FormattedDate date={weatherData.date} />,
@@ -72,13 +96,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "10fa90a2o832483bf734tfe8a27fcdad";
-    let units = "metric";
-    let city = "México";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=${units}`;
-
-    axios.get(apiUrl).then(displayWeather);
-
+    search();
     return "Loading Weather...";
   }
 }
