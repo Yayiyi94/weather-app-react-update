@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 import FormattedDate from "./FormattedDate";
+import AnimatedIcons from "./AnimatedIcons";
+import ChangeMetrics from "./ChangeMetrics";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
@@ -14,7 +16,7 @@ export default function Weather(props) {
       description: response.data.condition.description,
       humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
-      iconUrl: response.data.condition.icon_url,
+      icon: response.data.condition.icon,
       date: new Date(response.data.time * 1000),
       city: response.data.city,
     });
@@ -30,7 +32,6 @@ export default function Weather(props) {
       .then(displayWeather)
       .catch((error) => {
         console.error("Error fetching current weather", error);
-        alert("City not found, please type it again.");
       });
   }
 
@@ -79,17 +80,12 @@ export default function Weather(props) {
           </div>
           <div className="col-6">
             <div className="city-temperature">
-              <span id="weather-icon">
-                <img
-                  src="https://www.gstatic.com/weather/conditions2023/2023.2/svg/drizzle_light.svg"
-                  alt="Cloudy"
-                  className="temperature-icon"
-                />
+              <span className="float-left weather-icon">
+                <AnimatedIcons code={weatherData.icon} size={52} />
               </span>
-              <span className="temperature-element" id="temperature-element">
-                {weatherData.temperature}
+              <span className="changeMetrics">
+                <ChangeMetrics celsius={weatherData.temperature} />
               </span>
-              <span className="temperature-degree">°C °F</span>
             </div>
           </div>
         </div>
