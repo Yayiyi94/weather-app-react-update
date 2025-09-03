@@ -1,0 +1,18 @@
+.Forecast-day {
+  font-size: 20px;
+  font-weight: 500;
+  color: #66609e;
+}
+
+.Forecast-min {
+  opacity: 0.7;
+  margin-left: 7px;
+}
+
+.Forecast-max {
+  font-weight: 700;
+}
+
+.Forecast-icon {
+  margin: 5px;
+}

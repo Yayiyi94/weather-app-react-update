@@ -4,6 +4,7 @@ import "./Weather.css";
 import FormattedDate from "./FormattedDate";
 import AnimatedIcons from "./AnimatedIcons";
 import ChangeMetrics from "./ChangeMetrics";
+import Forecast from "./Forecast";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
@@ -19,6 +20,7 @@ export default function Weather(props) {
       icon: response.data.condition.icon,
       date: new Date(response.data.time * 1000),
       city: response.data.city,
+      coordinates: response.data.coordinates,
     });
   }
 
@@ -81,7 +83,11 @@ export default function Weather(props) {
           <div className="col-6">
             <div className="city-temperature">
               <span className="float-left weather-icon">
-                <AnimatedIcons code={weatherData.icon} size={52} />
+                <AnimatedIcons
+                  code={weatherData.icon}
+                  size={84}
+                  color="#a9a2e7ff"
+                />
               </span>
               <span className="changeMetrics">
                 <ChangeMetrics celsius={weatherData.temperature} />
@@ -89,6 +95,7 @@ export default function Weather(props) {
             </div>
           </div>
         </div>
+        <Forecast coordinates={weatherData.coordinates} />
       </div>
     );
   } else {
