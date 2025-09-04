@@ -8,6 +8,7 @@ import Forecast from "./Forecast";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
+
   const [weatherData, setWeatherData] = useState({ ready: false });
 
   function displayWeather(response) {

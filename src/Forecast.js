@@ -1,33 +1,17 @@
-import React, { useState } from "react";
-import AnimatedIcons from "./AnimatedIcons";
+import React, { useState, useEffect } from "react";
+import ForecastDay from "./ForecastDay";
 import "./Forecast.css";
 import axios from "axios";
 
-export default function Forecast(props) {
+export default function Forecast(props, unit) {
   let [loaded, setLoaded] = useState(false);
   let [forecastData, setForecastData] = useState(null);
 
-  function maxTemperature() {
-    let temp = Math.round(forecastData[0].temperature.maximum);
-    return `${temp} °C`;
-  }
-
-  function minTemperature() {
-    let temp = Math.round(forecastData[0].temperature.minimum);
-    return `${temp} °C`;
-  }
-
-  function day() {
-    let date = new Date(forecastData[0].temperature.day * 1000);
-    let day = date.getDay();
-
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-    return days[day];
-  }
+  useEffect(() => {
+    setLoaded(false);
+  }, [props.coordinates]);
 
   function displayForecast(response) {
-    console.log(response.data);
     setForecastData(response.data.daily);
 
     setLoaded(true);
@@ -52,21 +36,16 @@ export default function Forecast(props) {
     return (
       <div className="Forecast">
         <div className="row">
-          <div className="col">
-            <div className="Forecast-day">{day()}</div>
-            <div className="Forecast-icon">
-              <AnimatedIcons
-                code={forecastData[0].condition.icon}
-                size={42}
-                color="#f0ca4cff"
-              />
-            </div>
-
-            <div className="Forecast-temperatures">
-              <span className="Forecast-max">{maxTemperature()}</span>
-              <span className="Forecast-min"> {minTemperature()}</span>
-            </div>
-          </div>
+          {forecastData.map(function (dailyForecast, index) {
+            if (index < 5) {
+              return (
+                <div className="col" key={index}>
+                  {index}
+                  <ForecastDay data={dailyForecast} unit={unit} />
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     );
