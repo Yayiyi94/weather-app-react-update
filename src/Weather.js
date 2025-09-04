@@ -10,9 +10,6 @@ export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
   const [weatherData, setWeatherData] = useState({ ready: false });
 
-  const [degree, setDegree] = useState("C");
-  const [units, setUnits] = useState("metric");
-
   function displayWeather(response) {
     setWeatherData({
       ready: true,
@@ -93,15 +90,12 @@ export default function Weather(props) {
                 />
               </span>
               <span className="changeMetrics">
-                <ChangeMetrics
-                  celsius={weatherData.temperature}
-                  units={units}
-                />
+                <ChangeMetrics celsius={weatherData.temperature} />
               </span>
             </div>
           </div>
         </div>
-        <Forecast coordinates={weatherData.coordinates} units={units} />
+        <Forecast coordinates={weatherData.coordinates} />
       </div>
     );
   } else {

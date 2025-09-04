@@ -12,16 +12,17 @@ export default function Forecast(props) {
   }, [props.coordinates]);
 
   function displayForecast(response) {
-    setForecastData(response.data);
+    setForecastData(response.data.daily);
 
     setLoaded(true);
   }
 
   if (!loaded) {
     const apiKey = "10fa90a2o832483bf734tfe8a27fcdad";
+    let units = "metric";
     let longitude = props.coordinates.longitude;
     let latitude = props.coordinates.latitude;
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${props.units}`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}`;
 
     axios
       .get(apiUrl)
