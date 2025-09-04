@@ -8,8 +8,10 @@ import Forecast from "./Forecast";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
-
   const [weatherData, setWeatherData] = useState({ ready: false });
+
+  const [degree, setDegree] = useState("C");
+  const [units, setUnits] = useState("metric");
 
   function displayWeather(response) {
     setWeatherData({
@@ -91,12 +93,15 @@ export default function Weather(props) {
                 />
               </span>
               <span className="changeMetrics">
-                <ChangeMetrics celsius={weatherData.temperature} />
+                <ChangeMetrics
+                  celsius={weatherData.temperature}
+                  units={units}
+                />
               </span>
             </div>
           </div>
         </div>
-        <Forecast coordinates={weatherData.coordinates} />
+        <Forecast coordinates={weatherData.coordinates} units={units} />
       </div>
     );
   } else {

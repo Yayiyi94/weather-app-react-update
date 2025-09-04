@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 export default function ChangeMetrics(props) {
+  let units = props.unit;
+
   const [unit, setUnit] = useState("celsius");
 
   function showFahrenheit(event) {
