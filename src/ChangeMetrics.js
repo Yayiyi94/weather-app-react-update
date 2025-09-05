@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function ChangeMetrics(props) {
-  const [unit, setUnit] = useState("celsius");
-
+export default function ChangeMetrics({ celsius, unit, setUnit }) {
   function showFahrenheit(event) {
     event.preventDefault();
     setUnit("fahrenheit");
@@ -14,16 +12,16 @@ export default function ChangeMetrics(props) {
   }
 
   function calculateFahrenheit() {
-    return (props.celsius * 9) / 5 + 32;
+    return (celsius * 9) / 5 + 32;
   }
 
   if (unit === "celsius") {
     return (
       <div className="ChangeMetrics">
-        <span className="temperature-element">{props.celsius}</span>
+        <span className="temperature-element">{celsius}</span>
         <span className="temperature-degree">
           {" "}
-          °C |{" "}
+          °C |
           <a href="/" onClick={showFahrenheit}>
             °F
           </a>
@@ -40,8 +38,7 @@ export default function ChangeMetrics(props) {
           {" "}
           °F |
           <a href="/" onClick={showCelsius}>
-            {" "}
-            °C{" "}
+            °C
           </a>
         </span>
       </div>

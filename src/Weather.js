@@ -9,6 +9,7 @@ import Forecast from "./Forecast";
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
   const [weatherData, setWeatherData] = useState({ ready: false });
+  const [unit, setUnit] = useState("celsius");
 
   function displayWeather(response) {
     setWeatherData({
@@ -26,8 +27,7 @@ export default function Weather(props) {
 
   function search() {
     const apiKey = "10fa90a2o832483bf734tfe8a27fcdad";
-    let units = "metric";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${units}`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
     axios
       .get(apiUrl)
@@ -58,7 +58,6 @@ export default function Weather(props) {
           />
           <input type="submit" value="Search" className="search-button" />
         </form>
-
         <div className="row weather-overview">
           <div className="col-6">
             <h1 className="CityOverview">{city}</h1>
@@ -90,12 +89,16 @@ export default function Weather(props) {
                 />
               </span>
               <span className="changeMetrics">
-                <ChangeMetrics celsius={weatherData.temperature} />
+                <ChangeMetrics
+                  celsius={weatherData.temperature}
+                  unit={unit}
+                  setUnit={setUnit}
+                />
               </span>
             </div>
           </div>
         </div>
-        <Forecast coordinates={weatherData.coordinates} />
+        <Forecast coordinates={weatherData.coordinates} unit={unit} />{" "}
       </div>
     );
   } else {

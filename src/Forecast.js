@@ -41,7 +41,7 @@ export default function Forecast(props) {
               return (
                 <div className="col" key={index}>
                   {index}
-                  <ForecastDay data={dailyForecast} />
+                  <ForecastDay data={dailyForecast} unit={props.unit} />
                 </div>
               );
             } else {
